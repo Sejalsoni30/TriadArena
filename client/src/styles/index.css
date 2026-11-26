@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-deep: #060919;
+    --bg-base: #0A0E27;
+    --primary: #2563EB;
+    --primary-glow: #3B82F6;
+    --accent-cyan: #00F0FF;
+    --accent-magenta: #EC4899;
+    --accent-purple: #8B5CF6;
+  }
+
+  body {
+    background-color: var(--bg-base);
+    background-image: 
+      radial-gradient(at 0% 0%, rgba(37, 99, 235, 0.15) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.15) 0px, transparent 50%),
+      radial-gradient(at 50% 50%, rgba(0, 240, 255, 0.05) 0px, transparent 50%);
+    background-attachment: fixed;
+    color: #F3F4F6;
+  }
+
+  /* Focus ring accessibility */
+  *:focus-visible {
+    outline: 2px solid var(--accent-cyan);
+    outline-offset: 2px;
+  }
+}
+
+/* Glassmorphism utility classes */
+.glass-panel {
+  background: rgba(13, 20, 52, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-card {
+  background: rgba(16, 23, 62, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+}
+
+.glass-card-interactive {
+  transition: all 0.25s ease;
+}
+
+.glass-card-interactive:hover {
+  border-color: rgba(0, 240, 255, 0.5);
+  box-shadow: 0 10px 30px -10px rgba(0, 240, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.gradient-border-cyan {
+  border: 1px solid transparent;
+  background: linear-gradient(rgba(13, 20, 52, 0.9), rgba(13, 20, 52, 0.9)) padding-box,
+              linear-gradient(135deg, #00F0FF, #3B82F6, #8B5CF6) border-box;
+}
+
+.neon-text-cyan {
+  text-shadow: 0 0 12px rgba(0, 240, 255, 0.6);
+}
+
+.neon-text-magenta {
+  text-shadow: 0 0 12px rgba(236, 72, 153, 0.6);
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
