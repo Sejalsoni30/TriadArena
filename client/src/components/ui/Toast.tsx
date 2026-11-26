@@ -45,17 +45,17 @@ export const ToastContainer: React.FC = () => {
   const { toasts, removeToast } = useToast();
 
   const icons = {
-    success: <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />,
-    warning: <AlertTriangle className="w-5 h-5 text-amber-400 shrink-0" />,
-    danger: <AlertCircle className="w-5 h-5 text-rose-400 shrink-0" />,
-    info: <Info className="w-5 h-5 text-accent-cyan shrink-0" />
+    success: <CheckCircle2 className="w-5 h-5 text-semantic-win shrink-0" />,
+    warning: <AlertTriangle className="w-5 h-5 text-semantic-draw shrink-0" />,
+    danger: <AlertCircle className="w-5 h-5 text-semantic-loss shrink-0" />,
+    info: <Info className="w-5 h-5 text-semantic-info shrink-0" />
   };
 
   const borders = {
-    success: 'border-emerald-500/40',
-    warning: 'border-amber-500/40',
-    danger: 'border-rose-500/40',
-    info: 'border-accent-cyan/40'
+    success: 'border-semantic-win/40 shadow-glow-primary',
+    warning: 'border-semantic-draw/40',
+    danger: 'border-semantic-loss/40',
+    info: 'border-semantic-info/40 shadow-glow-cyan'
   };
 
   return (

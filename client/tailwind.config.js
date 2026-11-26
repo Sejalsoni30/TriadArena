@@ -9,34 +9,52 @@ export default {
     extend: {
       colors: {
         background: {
-          DEFAULT: '#0A0E27',
-          deep: '#060919',
-          card: 'rgba(16, 23, 62, 0.7)',
-          hover: 'rgba(28, 38, 96, 0.8)',
-          glass: 'rgba(13, 20, 52, 0.65)'
+          DEFAULT: '#070A1A',
+          base: '#070A1A',
+          elevated: '#0E1330',
+          glass: 'rgba(255, 255, 255, 0.06)',
+          card: '#0E1330',
+          deep: '#070A1A',
+          hover: 'rgba(255, 255, 255, 0.08)'
+        },
+        border: {
+          glass: 'rgba(255, 255, 255, 0.12)'
         },
         primary: {
-          DEFAULT: '#2563EB',
-          glow: '#3B82F6',
+          DEFAULT: '#3B82F6',
+          glow: 'rgba(59, 130, 246, 0.45)',
           light: '#60A5FA',
           dark: '#1D4ED8'
         },
         secondary: {
           DEFAULT: '#8B5CF6',
-          glow: '#A78BFA',
+          glow: 'rgba(139, 92, 246, 0.45)',
           dark: '#6D28D9'
         },
         accent: {
-          cyan: '#00F0FF',
-          magenta: '#EC4899',
-          amber: '#F59E0B'
+          cyan: '#22D3EE',
+          pink: '#F472B6',
+          magenta: '#F472B6',
+          amber: '#FBBF24'
+        },
+        text: {
+          primary: '#F5F7FF',
+          muted: '#9AA3C7',
+          subtle: '#6B7399'
         },
         semantic: {
-          success: '#10B981',
-          warning: '#F59E0B',
-          danger: '#EF4444',
-          info: '#3B82F6'
+          win: '#34D399',
+          loss: '#F87171',
+          draw: '#FBBF24',
+          info: '#38BDF8',
+          success: '#34D399',
+          danger: '#F87171',
+          warning: '#FBBF24'
         }
+      },
+      backgroundImage: {
+        'grad-hero': 'linear-gradient(135deg, #3B82F6 0%, #8B5CF6 60%, #22D3EE 100%)',
+        'grad-text': 'linear-gradient(90deg, #FFFFFF 0%, #A5B4FC 100%)'
       },
       fontFamily: {
         display: ['Orbitron', 'sans-serif'],
@@ -44,11 +62,12 @@ export default {
         mono: ['JetBrains Mono', 'monospace']
       },
       boxShadow: {
-        'glow-primary': '0 0 25px -5px rgba(37, 99, 235, 0.5)',
-        'glow-cyan': '0 0 25px -5px rgba(0, 240, 255, 0.5)',
-        'glow-magenta': '0 0 25px -5px rgba(236, 72, 153, 0.5)',
-        'glow-purple': '0 0 25px -5px rgba(139, 92, 246, 0.5)',
-        'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.37)'
+        'glow-primary': '0 0 25px -5px rgba(59, 130, 246, 0.45)',
+        'glow-cyan': '0 0 25px -5px rgba(34, 211, 238, 0.45)',
+        'glow-pink': '0 0 25px -5px rgba(244, 114, 182, 0.45)',
+        'glow-magenta': '0 0 25px -5px rgba(244, 114, 182, 0.45)',
+        'glow-purple': '0 0 25px -5px rgba(139, 92, 246, 0.45)',
+        'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.45)'
       },
       animation: {
         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',

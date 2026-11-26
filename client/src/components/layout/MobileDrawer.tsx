@@ -35,7 +35,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-background-deep/80 backdrop-blur-md"
+            className="fixed inset-0 bg-background-base/80 backdrop-blur-md"
           />
 
           {/* Drawer content */}
@@ -44,7 +44,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="relative w-4/5 max-w-sm h-full glass-panel bg-background-deep p-6 border-l border-gray-800 flex flex-col justify-between shadow-2xl z-10"
+            className="relative w-4/5 max-w-sm h-full glass-panel bg-background-elevated p-6 border-l border-border-glass flex flex-col justify-between shadow-2xl z-10"
           >
             <div>
               {/* Header */}

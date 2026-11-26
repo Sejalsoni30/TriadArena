@@ -1,5 +1,5 @@
 import React from 'react';
-import { Swords, ArrowLeft, Calendar, ShieldCheck } from 'lucide-react';
+import { Swords, ArrowLeft, Calendar, ShieldCheck, CheckCircle2, XCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Navbar } from '../components/layout/Navbar';
 import { Footer } from '../components/layout/Footer';
@@ -37,12 +37,17 @@ export const MatchHistoryPage: React.FC = () => {
             <Card key={m.id} className="p-5">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3 border-b border-gray-800 pb-3">
                 <div className="flex items-center gap-3">
-                  <span className={`px-2.5 py-1 rounded text-xs font-mono font-bold uppercase ${
+                  <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-mono font-bold uppercase ${
                     m.result === 'win'
-                      ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40'
-                      : 'bg-rose-500/20 text-rose-400 border border-rose-500/40'
+                      ? 'bg-semantic-win/20 text-semantic-win border border-semantic-win/40'
+                      : 'bg-semantic-loss/20 text-semantic-loss border border-semantic-loss/40'
                   }`}>
-                    {m.result}
+                    {m.result === 'win' ? (
+                      <CheckCircle2 className="w-3.5 h-3.5 text-semantic-win" />
+                    ) : (
+                      <XCircle className="w-3.5 h-3.5 text-semantic-loss" />
+                    )}
+                    <span>{m.result}</span>
                   </span>
                   <div>
                     <h3 className="font-display font-bold text-white text-sm">{m.mode} vs {m.opponent}</h3>

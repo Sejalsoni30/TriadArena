@@ -10,7 +10,9 @@ import {
   TrendingUp, 
   Sparkles,
   Calendar,
-  Play
+  Play,
+  CheckCircle2,
+  XCircle
 } from 'lucide-react';
 import { Navbar } from '../components/layout/Navbar';
 import { Footer } from '../components/layout/Footer';
@@ -231,12 +233,17 @@ export const DashboardPage: React.FC = () => {
                         <td className="py-3 px-4 text-white font-medium">{match.mode}</td>
                         <td className="py-3 px-4 text-gray-300">{match.opponent}</td>
                         <td className="py-3 px-4">
-                          <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase ${
+                          <span className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase ${
                             match.result === 'win'
-                              ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
-                              : 'bg-rose-500/20 text-rose-400 border border-rose-500/30'
+                              ? 'bg-semantic-win/20 text-semantic-win border border-semantic-win/30'
+                              : 'bg-semantic-loss/20 text-semantic-loss border border-semantic-loss/30'
                           }`}>
-                            {match.result}
+                            {match.result === 'win' ? (
+                              <CheckCircle2 className="w-3 h-3 text-semantic-win" />
+                            ) : (
+                              <XCircle className="w-3 h-3 text-semantic-loss" />
+                            )}
+                            <span>{match.result}</span>
                           </span>
                         </td>
                         <td className="py-3 px-4 text-white font-bold">{match.score}</td>

@@ -66,8 +66,8 @@ export const Navbar: React.FC = () => {
         <div
           className={`max-w-7xl mx-auto transition-all duration-300 ${
             scrolled
-              ? 'glass-panel rounded-full px-6 py-2.5 border border-primary/30 shadow-glass backdrop-blur-2xl'
-              : 'px-4 sm:px-6 lg:px-8 py-4 border-b border-gray-800/60 bg-background/80 backdrop-blur-md'
+              ? 'glass-panel rounded-full px-6 py-2.5 border border-border-glass shadow-glass backdrop-blur-2xl'
+              : 'px-4 sm:px-6 lg:px-8 py-4 border-b border-border-glass bg-background-base/80 backdrop-blur-md'
           } flex items-center justify-between`}
         >
           {/* Brand Logo */}
@@ -93,7 +93,7 @@ export const Navbar: React.FC = () => {
                   className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-200 ${
                     isActive
                       ? 'text-accent-cyan bg-accent-cyan/15 font-bold border border-accent-cyan/40 shadow-glow-cyan'
-                      : 'text-gray-300 hover:text-white hover:bg-white/5'
+                      : 'text-text-muted hover:text-text-primary hover:bg-white/5'
                   }`}
                 >
                   {link.icon}

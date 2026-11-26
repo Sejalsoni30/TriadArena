@@ -2,7 +2,7 @@ import React, { HTMLAttributes } from 'react';
 import { cn } from '../../lib/utils';
 
 export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
-  variant?: 'primary' | 'cyan' | 'magenta' | 'purple' | 'success' | 'warning' | 'danger' | 'neutral';
+  variant?: 'primary' | 'cyan' | 'pink' | 'magenta' | 'purple' | 'win' | 'loss' | 'draw' | 'info' | 'success' | 'warning' | 'danger' | 'neutral';
   size?: 'sm' | 'md';
 }
 
@@ -16,12 +16,17 @@ export const Badge: React.FC<BadgeProps> = ({
   const variants = {
     primary: 'bg-primary/20 text-primary-light border-primary/40',
     cyan: 'bg-accent-cyan/15 text-accent-cyan border-accent-cyan/40',
-    magenta: 'bg-accent-magenta/15 text-accent-magenta border-accent-magenta/40',
-    purple: 'bg-secondary/20 text-secondary-glow border-secondary/40',
-    success: 'bg-semantic-success/20 text-emerald-400 border-semantic-success/40',
-    warning: 'bg-semantic-warning/20 text-amber-300 border-semantic-warning/40',
-    danger: 'bg-semantic-danger/20 text-rose-400 border-semantic-danger/40',
-    neutral: 'bg-gray-800/80 text-gray-300 border-gray-700'
+    pink: 'bg-accent-pink/15 text-accent-pink border-accent-pink/40',
+    magenta: 'bg-accent-pink/15 text-accent-pink border-accent-pink/40',
+    purple: 'bg-secondary/20 text-secondary border-secondary/40',
+    win: 'bg-semantic-win/20 text-semantic-win border-semantic-win/40',
+    loss: 'bg-semantic-loss/20 text-semantic-loss border-semantic-loss/40',
+    draw: 'bg-semantic-draw/20 text-semantic-draw border-semantic-draw/40',
+    info: 'bg-semantic-info/20 text-semantic-info border-semantic-info/40',
+    success: 'bg-semantic-win/20 text-semantic-win border-semantic-win/40',
+    warning: 'bg-semantic-draw/20 text-semantic-draw border-semantic-draw/40',
+    danger: 'bg-semantic-loss/20 text-semantic-loss border-semantic-loss/40',
+    neutral: 'bg-background-elevated text-text-muted border-border-glass'
   };
 
   const sizes = {

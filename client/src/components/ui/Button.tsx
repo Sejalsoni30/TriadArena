@@ -14,12 +14,12 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     const baseStyles = 'relative group overflow-hidden inline-flex items-center justify-center font-display font-semibold tracking-wider transition-all duration-200 rounded-xl active:scale-95 disabled:opacity-50 disabled:pointer-events-none disabled:active:scale-100 select-none cursor-pointer';
 
     const variants = {
-      primary: 'bg-primary hover:bg-primary-glow text-white shadow-glow-primary border border-primary-light/30 hover:border-primary-light hover:shadow-lg',
-      secondary: 'bg-secondary hover:bg-secondary-glow text-white shadow-glow-purple border border-secondary-glow/30',
-      accent: 'bg-gradient-to-r from-accent-cyan via-primary to-accent-magenta text-black font-bold hover:brightness-110 shadow-glow-cyan hover:shadow-glow-cyan',
-      outline: 'bg-transparent border border-gray-700 text-gray-200 hover:border-accent-cyan hover:text-accent-cyan hover:bg-accent-cyan/10 hover:shadow-glow-cyan',
-      ghost: 'bg-transparent text-gray-300 hover:text-white hover:bg-white/10',
-      danger: 'bg-semantic-danger text-white hover:bg-red-600 shadow-md border border-red-400/30'
+      primary: 'bg-primary hover:bg-blue-500 text-white shadow-glow-primary border border-primary-light/30 hover:border-primary-light hover:shadow-lg',
+      secondary: 'bg-secondary hover:bg-purple-500 text-white shadow-glow-purple border border-secondary/40',
+      accent: 'bg-gradient-to-r from-accent-cyan via-primary to-accent-pink text-[#070A1A] font-black hover:brightness-110 shadow-glow-cyan hover:shadow-glow-cyan',
+      outline: 'bg-transparent border border-border-glass text-text-primary hover:border-accent-cyan hover:text-accent-cyan hover:bg-accent-cyan/10 hover:shadow-glow-cyan',
+      ghost: 'bg-transparent text-text-muted hover:text-text-primary hover:bg-white/5',
+      danger: 'bg-semantic-loss text-white hover:bg-red-500 shadow-md border border-semantic-loss/40'
     };
 
     const sizes = {

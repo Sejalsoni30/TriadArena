@@ -8,6 +8,8 @@ import {
   Users, 
   ShieldCheck, 
   CheckCircle2, 
+  XCircle,
+  MinusCircle,
   Trophy, 
   RotateCcw,
   AlertTriangle
@@ -387,14 +389,29 @@ export const LobbyPage: React.FC = () => {
                       <span className="text-xl font-display font-black text-gray-500">VS</span>
                       <div className="flex flex-col items-center">
                         <span className="text-6xl mb-2">{moveEmojis[revealedMoves.opp]}</span>
-                        <span className="font-display font-bold text-xs uppercase text-accent-magenta">{opponent.username}</span>
+                        <span className="font-display font-bold text-xs uppercase text-accent-pink">{opponent.username}</span>
                       </div>
                     </div>
 
                     <div className="mt-2">
-                      {roundWinner === 'me' && <Badge variant="success" size="md">Round Won</Badge>}
-                      {roundWinner === 'opp' && <Badge variant="danger" size="md">Round Lost</Badge>}
-                      {roundWinner === 'draw' && <Badge variant="warning" size="md">Stand-Off (Draw)</Badge>}
+                      {roundWinner === 'me' && (
+                        <Badge variant="win" size="md" className="gap-1.5">
+                          <CheckCircle2 className="w-4 h-4 text-semantic-win" />
+                          <span>Round Won</span>
+                        </Badge>
+                      )}
+                      {roundWinner === 'opp' && (
+                        <Badge variant="loss" size="md" className="gap-1.5">
+                          <XCircle className="w-4 h-4 text-semantic-loss" />
+                          <span>Round Lost</span>
+                        </Badge>
+                      )}
+                      {roundWinner === 'draw' && (
+                        <Badge variant="draw" size="md" className="gap-1.5">
+                          <MinusCircle className="w-4 h-4 text-semantic-draw" />
+                          <span>Stand-Off (Draw)</span>
+                        </Badge>
+                      )}
                     </div>
                   </motion.div>
                 )}

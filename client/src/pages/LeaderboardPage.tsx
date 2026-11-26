@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Flame, Search, Trophy, Filter } from 'lucide-react';
+import { Flame, Search, Trophy, Filter, CheckCircle2 } from 'lucide-react';
 import { Navbar } from '../components/layout/Navbar';
 import { Footer } from '../components/layout/Footer';
 import { Card } from '../components/ui/Card';
@@ -73,7 +73,7 @@ export const LeaderboardPage: React.FC = () => {
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse text-sm">
               <thead>
-                <tr className="border-b border-gray-800 bg-background-deep/80 font-mono text-xs text-gray-400 uppercase">
+                <tr className="border-b border-border-glass bg-background-elevated font-mono text-xs text-text-muted uppercase">
                   <th className="py-4 px-4">Rank</th>
                   <th className="py-4 px-4">Gladiator</th>
                   <th className="py-4 px-4">Rating</th>
@@ -83,15 +83,15 @@ export const LeaderboardPage: React.FC = () => {
                   <th className="py-4 px-4">Level</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-800/60 font-mono">
+              <tbody className="divide-y divide-border-glass font-mono">
                 {filteredPlayers.map((player) => (
                   <tr key={player.rank} className="hover:bg-white/[0.02] transition-colors">
                     <td className="py-4 px-4">
                       <span className={`inline-flex items-center justify-center w-7 h-7 rounded-lg font-bold text-xs ${
-                        player.rank === 1 ? 'bg-amber-400/20 text-amber-300 border border-amber-400/40 shadow-glow-primary' :
+                        player.rank === 1 ? 'bg-semantic-draw/20 text-semantic-draw border border-semantic-draw/40 shadow-glow-primary' :
                         player.rank === 2 ? 'bg-slate-300/20 text-slate-200 border border-slate-300/40' :
                         player.rank === 3 ? 'bg-amber-700/20 text-amber-500 border border-amber-700/40' :
-                        'text-gray-400'
+                        'text-text-muted'
                       }`}>
                         {player.rank}
                       </span>
@@ -99,16 +99,21 @@ export const LeaderboardPage: React.FC = () => {
                     <td className="py-4 px-4">
                       <div className="flex items-center gap-3">
                         <Avatar name={player.name} size="sm" />
-                        <span className="font-display font-semibold text-white">{player.name}</span>
+                        <span className="font-display font-semibold text-text-primary">{player.name}</span>
                       </div>
                     </td>
                     <td className="py-4 px-4 text-accent-cyan font-bold">{player.rating}</td>
                     <td className="py-4 px-4">
                       <Badge variant="purple" size="sm">{player.tier}</Badge>
                     </td>
-                    <td className="py-4 px-4 text-emerald-400">{player.winRate}%</td>
-                    <td className="py-4 px-4 text-gray-400">{player.wins}W - {player.losses}L</td>
-                    <td className="py-4 px-4 text-gray-300">Lvl {player.level}</td>
+                    <td className="py-4 px-4 text-semantic-win">
+                      <div className="flex items-center gap-1.5">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-semantic-win shrink-0" />
+                        <span>{player.winRate}%</span>
+                      </div>
+                    </td>
+                    <td className="py-4 px-4 text-text-muted">{player.wins}W - {player.losses}L</td>
+                    <td className="py-4 px-4 text-text-muted">Lvl {player.level}</td>
                   </tr>
                 ))}
               </tbody>

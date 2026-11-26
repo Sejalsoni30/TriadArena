@@ -158,7 +158,7 @@ export const SoloPage: React.FC = () => {
   const moveIcons: Record<Move, { icon: string; name: string; color: string }> = {
     rock: { icon: '✊', name: 'Rock', color: 'from-blue-600 to-primary-light' },
     paper: { icon: '✋', name: 'Paper', color: 'from-cyan-500 to-blue-400' },
-    scissors: { icon: '✌', name: 'Scissors', color: 'from-purple-600 to-accent-magenta' }
+    scissors: { icon: '✌', name: 'Scissors', color: 'from-purple-600 to-accent-pink' }
   };
 
   return (
@@ -341,7 +341,7 @@ export const SoloPage: React.FC = () => {
                         className="flex flex-col items-center"
                       >
                         <span className="text-5xl sm:text-6xl mb-2">{moveIcons[aiMove].icon}</span>
-                        <span className="font-display font-bold text-xs uppercase text-accent-magenta">AI</span>
+                        <span className="font-display font-bold text-xs uppercase text-accent-pink">AI</span>
                       </motion.div>
                     </div>
 
@@ -353,18 +353,18 @@ export const SoloPage: React.FC = () => {
                       className="mt-2"
                     >
                       {lastOutcome === 'win' && (
-                        <Badge variant="success" size="md" className="text-sm px-4 py-1.5 gap-1.5">
-                          <CheckCircle2 className="w-4 h-4" /> Round Won
+                        <Badge variant="win" size="md" className="text-sm px-4 py-1.5 gap-1.5">
+                          <CheckCircle2 className="w-4 h-4 text-semantic-win" /> Round Won
                         </Badge>
                       )}
                       {lastOutcome === 'lose' && (
-                        <Badge variant="danger" size="md" className="text-sm px-4 py-1.5 gap-1.5">
-                          <XCircle className="w-4 h-4" /> Round Conceded
+                        <Badge variant="loss" size="md" className="text-sm px-4 py-1.5 gap-1.5">
+                          <XCircle className="w-4 h-4 text-semantic-loss" /> Round Conceded
                         </Badge>
                       )}
                       {lastOutcome === 'draw' && (
-                        <Badge variant="warning" size="md" className="text-sm px-4 py-1.5 gap-1.5">
-                          <MinusCircle className="w-4 h-4" /> Stand-Off (Draw)
+                        <Badge variant="draw" size="md" className="text-sm px-4 py-1.5 gap-1.5">
+                          <MinusCircle className="w-4 h-4 text-semantic-draw" /> Stand-Off (Draw)
                         </Badge>
                       )}
                     </motion.div>
