@@ -32,6 +32,7 @@ import {
 } from '@triad-arena/shared';
 import { useAuthStore } from '../store/authStore';
 import { useToast } from '../components/ui/Toast';
+import { sound } from '../lib/sound';
 
 export const SoloPage: React.FC = () => {
   const { user, updateUser } = useAuthStore();
@@ -81,6 +82,7 @@ export const SoloPage: React.FC = () => {
   const handleSelectMove = (move: Move) => {
     if (gameState !== 'playing') return;
 
+    sound.playLock();
     setPlayerMove(move);
     const updatedHistory = [...playerHistory, move];
     setPlayerHistory(updatedHistory);
@@ -92,6 +94,7 @@ export const SoloPage: React.FC = () => {
     const outcome = evaluateRound(move, botMove);
     setLastOutcome(outcome);
     setGameState('round_reveal');
+    sound.playClash();
 
     let newPScore = playerScore;
     let newAiScore = aiScore;
@@ -110,6 +113,7 @@ export const SoloPage: React.FC = () => {
       if (winner) {
         setGameState('game_over');
         if (winner === 'player') {
+          sound.playWin();
           confetti({ particleCount: 120, spread: 70, origin: { y: 0.6 } });
           addToast({ type: 'success', title: 'Victory!', message: `Defeated ${difficulty.toUpperCase()} AI!` });
           if (user) {
@@ -126,6 +130,7 @@ export const SoloPage: React.FC = () => {
             });
           }
         } else {
+          sound.playLose();
           addToast({ type: 'warning', title: 'Defeated', message: 'The AI predicted your strategy.' });
           if (user) {
             updateUser({
@@ -313,7 +318,7 @@ export const SoloPage: React.FC = () => {
                     initial={{ scale: 0.8, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
                     exit={{ scale: 0.8, opacity: 0 }}
-                    className="flex flex-col items-center gap-4 w-full"
+                    className="flex flex-col items-center gap-4 w-full animate-shake"
                   >
                     <div className="flex items-center justify-around w-full max-w-md">
                       {/* Player Move */}

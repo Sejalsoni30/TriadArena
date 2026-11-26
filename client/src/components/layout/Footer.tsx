@@ -1,11 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Swords, ShieldCheck, HeartHandshake, Mail, Github, Twitter } from 'lucide-react';
+import { Swords, ShieldCheck, HeartHandshake, ArrowRight } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="w-full bg-background-deep border-t border-gray-800/80 py-12 px-4 sm:px-6 lg:px-8 text-gray-400 text-xs">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+    <footer className="w-full bg-background-deep border-t border-gray-800/80 py-16 px-4 sm:px-6 lg:px-8 text-gray-400 text-xs relative overflow-hidden">
+      {/* Background ambient glow */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-32 bg-primary/10 blur-[100px] pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 mb-12 relative z-10">
         {/* Brand */}
         <div className="flex flex-col gap-3">
           <div className="flex items-center gap-2">
@@ -62,7 +65,14 @@ export const Footer: React.FC = () => {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto pt-6 border-t border-gray-800/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-gray-400">
+      {/* Large Cinematic Wordmark (Section 14.4) */}
+      <div className="max-w-7xl mx-auto py-8 border-y border-gray-800/60 my-8 text-center select-none relative z-10">
+        <h2 className="text-5xl sm:text-8xl md:text-9xl font-display font-black tracking-widest bg-gradient-to-b from-white/15 via-white/5 to-transparent bg-clip-text text-transparent hover:from-accent-cyan/30 transition-all duration-700">
+          TRIAD ARENA
+        </h2>
+      </div>
+
+      <div className="max-w-7xl mx-auto pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-gray-400 relative z-10">
         <p>© 2026 Triad Arena. All rights reserved. Server-authoritative competitive platform.</p>
         <div className="flex items-center gap-4 text-gray-400">
           <span className="flex items-center gap-1"><HeartHandshake className="w-4 h-4 text-accent-cyan" /> 100% Free-to-Play</span>

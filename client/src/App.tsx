@@ -1,11 +1,14 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { ToastContainer } from './components/ui/Toast';
+import { Preloader } from './components/motion/Preloader';
+import { CustomCursor } from './components/motion/CustomCursor';
+import { useLenis } from './hooks/useLenis';
+
+// Pages
 import { LandingPage } from './pages/LandingPage';
 import { HowToPlayPage } from './pages/HowToPlayPage';
 import { NotFoundPage } from './pages/NotFoundPage';
-
-// Lazy or direct loaded pages
 import { LoginPage } from './pages/LoginPage';
 import { RegisterPage } from './pages/RegisterPage';
 import { ForgotPasswordPage } from './pages/ForgotPasswordPage';
@@ -22,8 +25,17 @@ import { AchievementsPage } from './pages/AchievementsPage';
 import { MatchHistoryPage } from './pages/MatchHistoryPage';
 
 export const App: React.FC = () => {
+  // Initialize Lenis smooth inertial scrolling
+  useLenis();
+
   return (
     <>
+      {/* Intro Preloader (<2s branded cinematic entrance) */}
+      <Preloader />
+
+      {/* Desktop Custom Fluid Magnetic Cursor */}
+      <CustomCursor />
+
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/how-to-play" element={<HowToPlayPage />} />

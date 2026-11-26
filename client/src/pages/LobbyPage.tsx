@@ -30,6 +30,7 @@ import {
 } from '@triad-arena/shared';
 import { useAuthStore } from '../store/authStore';
 import { useToast } from '../components/ui/Toast';
+import { sound } from '../lib/sound';
 
 export const LobbyPage: React.FC = () => {
   const { user, updateUser } = useAuthStore();
@@ -113,6 +114,7 @@ export const LobbyPage: React.FC = () => {
   // Commit Move Handler
   const handleCommitMove = (move: Move) => {
     if (myCommittedMove) return;
+    sound.playLock();
     setMyCommittedMove(move);
 
     // Opponent commits randomly within 1-2 seconds
@@ -123,6 +125,7 @@ export const LobbyPage: React.FC = () => {
       setTimeout(() => {
         const moves: Move[] = ['rock', 'paper', 'scissors'];
         const oppMove = moves[Math.floor(Math.random() * moves.length)];
+        sound.playClash();
         setRevealedMoves({ me: move, opp: oppMove });
 
         const outcome = evaluateRound(move, oppMove);
@@ -156,6 +159,7 @@ export const LobbyPage: React.FC = () => {
             setRatingDelta(eloCalc.deltaA);
 
             if (isMe) {
+              sound.playWin();
               confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
               addToast({ type: 'success', title: 'Ranked Victory!', message: `Earned ${eloCalc.deltaA} Elo!` });
               if (user) {
@@ -174,6 +178,7 @@ export const LobbyPage: React.FC = () => {
                 });
               }
             } else {
+              sound.playLose();
               addToast({ type: 'warning', title: 'Match Conceded', message: `${eloCalc.deltaA} Elo adjustment.` });
               if (user) {
                 updateUser({
@@ -372,7 +377,7 @@ export const LobbyPage: React.FC = () => {
                     key="revealed"
                     initial={{ scale: 0.8, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
-                    className="flex flex-col items-center gap-4 w-full"
+                    className="flex flex-col items-center gap-4 w-full animate-shake"
                   >
                     <div className="flex items-center justify-around w-full max-w-md">
                       <div className="flex flex-col items-center">
