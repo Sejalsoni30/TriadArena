@@ -21,6 +21,7 @@ import { Card } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
 import { Badge } from '../components/ui/Badge';
 import { Avatar } from '../components/ui/Avatar';
+import { AudioControl } from '../components/ui/AudioControl';
 import { 
   Move, 
   BestOf, 
@@ -103,6 +104,9 @@ export const LobbyPage: React.FC = () => {
   useEffect(() => {
     let timer: NodeJS.Timeout;
     if (queueState === 'in_match' && turnTimer > 0 && !revealedMoves) {
+      if (turnTimer <= 3) {
+        sound.playCountdown(turnTimer);
+      }
       timer = setTimeout(() => setTurnTimer((t: number) => t - 1), 1000);
     } else if (queueState === 'in_match' && turnTimer === 0 && !revealedMoves) {
       // Auto-commit on timeout
@@ -310,6 +314,11 @@ export const LobbyPage: React.FC = () => {
 
         {(queueState === 'in_match' || queueState === 'match_over') && opponent && (
           <div className="w-full flex flex-col items-center gap-6">
+            <div className="w-full flex justify-between items-center">
+              <span className="text-xs font-mono text-text-muted uppercase">Ranked Match in Progress</span>
+              <AudioControl compact />
+            </div>
+
             {/* Header Scoreboard */}
             <div className="w-full glass-panel rounded-2xl p-4 sm:p-6 border border-gray-800 flex items-center justify-between shadow-2xl">
               <div className="flex items-center gap-3">

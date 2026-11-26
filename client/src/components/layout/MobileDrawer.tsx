@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Swords, LogOut, LayoutDashboard, UserCheck } from 'lucide-react';
 import { Avatar } from '../ui/Avatar';
 import { Button } from '../ui/Button';
+import { AudioControl } from '../ui/AudioControl';
 import { UserProfile } from '@triad-arena/shared';
 
 export interface MobileDrawerProps {
@@ -113,8 +114,14 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
               </nav>
             </div>
 
+            {/* Sound & Music Controls */}
+            <div className="py-3 px-1 border-t border-gray-800/80 flex items-center justify-between">
+              <span className="text-xs font-display font-semibold text-text-muted">Audio & Music</span>
+              <AudioControl />
+            </div>
+
             {/* Footer actions */}
-            <div className="pt-6 border-t border-gray-800 flex flex-col gap-3">
+            <div className="pt-4 border-t border-gray-800 flex flex-col gap-3">
               {isAuthenticated ? (
                 <Button
                   variant="outline"

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { User, Mail, Shield, Save, Check } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { User, Mail, Shield, Save, Check, Volume2, VolumeX, Music, Bell, Play } from 'lucide-react';
 import { Navbar } from '../components/layout/Navbar';
 import { Footer } from '../components/layout/Footer';
 import { Card } from '../components/ui/Card';
@@ -8,6 +8,7 @@ import { Input } from '../components/ui/Input';
 import { Avatar } from '../components/ui/Avatar';
 import { useAuthStore } from '../store/authStore';
 import { useToast } from '../components/ui/Toast';
+import { sound, AudioState } from '../lib/sound';
 
 export const ProfilePage: React.FC = () => {
   const { user, updateUser } = useAuthStore();
@@ -17,6 +18,19 @@ export const ProfilePage: React.FC = () => {
   const [bio, setBio] = useState(user?.bio || 'Competitive Triad strategist.');
   const [avatar, setAvatar] = useState(user?.avatar || '');
   const [isSaving, setIsSaving] = useState(false);
+  const [audioState, setAudioState] = useState<AudioState>(sound.getState());
+  const [testingAudio, setTestingAudio] = useState(false);
+
+  useEffect(() => {
+    const unsub = sound.subscribe((st) => setAudioState({ ...st }));
+    return () => unsub();
+  }, []);
+
+  const handleTestAudio = () => {
+    setTestingAudio(true);
+    sound.testAudio();
+    setTimeout(() => setTestingAudio(false), 900);
+  };
 
   const avatarOptions = [
     'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80',
@@ -102,6 +116,140 @@ export const ProfilePage: React.FC = () => {
                   className="w-full bg-background-deep/80 border border-gray-700/80 rounded-lg p-3 text-sm text-gray-100 focus:border-accent-cyan focus:outline-none"
                 />
                 <span className="text-[10px] text-gray-400 text-right">{bio.length}/200 characters</span>
+              </div>
+            </div>
+          </Card>
+
+          {/* Audio & Soundscape Settings Card */}
+          <Card className="p-6">
+            <div className="flex items-center justify-between mb-4 pb-3 border-b border-border-glass">
+              <div>
+                <h2 className="text-base font-display font-bold text-white flex items-center gap-2">
+                  <Volume2 className="w-5 h-5 text-accent-cyan" /> Audio & Soundscape Settings
+                </h2>
+                <p className="text-xs text-text-muted mt-0.5">
+                  Configure procedural synth music and reactive sound design effects.
+                </p>
+              </div>
+
+              <button
+                type="button"
+                onClick={handleTestAudio}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-display font-bold uppercase transition-all ${
+                  testingAudio
+                    ? 'bg-accent-cyan text-background-base shadow-glow-cyan'
+                    : 'bg-white/10 text-text-primary hover:bg-white/15'
+                }`}
+              >
+                {testingAudio ? (
+                  <>
+                    <Check className="w-3.5 h-3.5" /> Testing Audio...
+                  </>
+                ) : (
+                  <>
+                    <Play className="w-3.5 h-3.5 fill-current" /> Test Audio Now
+                  </>
+                )}
+              </button>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Music Setting */}
+              <div className="p-4 rounded-xl glass-panel border border-border-glass bg-background-elevated/60">
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center gap-2.5">
+                    <div className={`p-2 rounded-lg ${audioState.musicEnabled ? 'bg-secondary/20 text-secondary' : 'bg-white/5 text-text-subtle'}`}>
+                      <Music className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <span className="text-sm font-display font-semibold text-text-primary block">
+                        Procedural Synth Music
+                      </span>
+                      <span className="text-xs text-text-muted">Cyberpunk ambient background loop</span>
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      sound.unlockAudio();
+                      sound.toggleMusic();
+                    }}
+                    className={`w-11 h-6 rounded-full transition-colors relative flex items-center p-0.5 ${
+                      audioState.musicEnabled ? 'bg-secondary' : 'bg-gray-800'
+                    }`}
+                  >
+                    <span
+                      className={`w-5 h-5 rounded-full bg-white transition-transform ${
+                        audioState.musicEnabled ? 'translate-x-5' : 'translate-x-0'
+                      }`}
+                    />
+                  </button>
+                </div>
+
+                <div className="flex items-center gap-3 pt-2">
+                  <span className="text-xs font-mono text-text-subtle w-8">
+                    {Math.round(audioState.musicVolume * 100)}%
+                  </span>
+                  <input
+                    type="range"
+                    min="0"
+                    max="1"
+                    step="0.05"
+                    disabled={!audioState.musicEnabled}
+                    value={audioState.musicVolume}
+                    onChange={(e) => sound.setMusicVolume(parseFloat(e.target.value))}
+                    className="w-full accent-secondary h-1.5 bg-gray-800 rounded-lg cursor-pointer disabled:opacity-40"
+                  />
+                </div>
+              </div>
+
+              {/* SFX Setting */}
+              <div className="p-4 rounded-xl glass-panel border border-border-glass bg-background-elevated/60">
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center gap-2.5">
+                    <div className={`p-2 rounded-lg ${audioState.sfxEnabled ? 'bg-accent-cyan/20 text-accent-cyan' : 'bg-white/5 text-text-subtle'}`}>
+                      <Bell className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <span className="text-sm font-display font-semibold text-text-primary block">
+                        Sound Effects (SFX)
+                      </span>
+                      <span className="text-xs text-text-muted">Lock-in, clash impact, victory fanfares</span>
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      sound.unlockAudio();
+                      sound.toggleSfx();
+                    }}
+                    className={`w-11 h-6 rounded-full transition-colors relative flex items-center p-0.5 ${
+                      audioState.sfxEnabled ? 'bg-accent-cyan' : 'bg-gray-800'
+                    }`}
+                  >
+                    <span
+                      className={`w-5 h-5 rounded-full bg-white transition-transform ${
+                        audioState.sfxEnabled ? 'translate-x-5' : 'translate-x-0'
+                      }`}
+                    />
+                  </button>
+                </div>
+
+                <div className="flex items-center gap-3 pt-2">
+                  <span className="text-xs font-mono text-text-subtle w-8">
+                    {Math.round(audioState.sfxVolume * 100)}%
+                  </span>
+                  <input
+                    type="range"
+                    min="0"
+                    max="1"
+                    step="0.05"
+                    disabled={!audioState.sfxEnabled}
+                    value={audioState.sfxVolume}
+                    onChange={(e) => sound.setSfxVolume(parseFloat(e.target.value))}
+                    className="w-full accent-accent-cyan h-1.5 bg-gray-800 rounded-lg cursor-pointer disabled:opacity-40"
+                  />
+                </div>
               </div>
             </div>
           </Card>

@@ -19,6 +19,7 @@ import { Footer } from '../components/layout/Footer';
 import { Card } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
 import { Badge } from '../components/ui/Badge';
+import { AudioControl } from '../components/ui/AudioControl';
 import { 
   Move, 
   AiDifficulty, 
@@ -57,6 +58,9 @@ export const SoloPage: React.FC = () => {
   useEffect(() => {
     let timer: NodeJS.Timeout;
     if (gameState === 'playing' && timeLeft > 0) {
+      if (timeLeft <= 3) {
+        sound.playCountdown(timeLeft);
+      }
       timer = setTimeout(() => setTimeLeft((prev: number) => prev - 1), 1000);
     } else if (gameState === 'playing' && timeLeft === 0) {
       // Auto-assign random move if timeout occurs
@@ -94,7 +98,9 @@ export const SoloPage: React.FC = () => {
     const outcome = evaluateRound(move, botMove);
     setLastOutcome(outcome);
     setGameState('round_reveal');
-    sound.playClash();
+    setTimeout(() => {
+      sound.playClash();
+    }, 350);
 
     let newPScore = playerScore;
     let newAiScore = aiScore;
@@ -172,6 +178,7 @@ export const SoloPage: React.FC = () => {
             <ArrowLeft className="w-4 h-4" /> Exit Arena
           </Link>
           <div className="flex items-center gap-2">
+            <AudioControl compact />
             <Badge variant="cyan" size="sm">Solo Battle</Badge>
             <Badge variant="purple" size="sm">{difficulty.toUpperCase()} AI</Badge>
           </div>

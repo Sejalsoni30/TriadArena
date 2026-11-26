@@ -4,6 +4,7 @@ import { ToastContainer } from './components/ui/Toast';
 import { Preloader } from './components/motion/Preloader';
 import { CustomCursor } from './components/motion/CustomCursor';
 import { useLenis } from './hooks/useLenis';
+import { sound } from './lib/sound';
 
 // Pages
 import { LandingPage } from './pages/LandingPage';

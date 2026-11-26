@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Swords, Trophy, Flame, Play, Menu, Volume2, VolumeX } from 'lucide-react';
+import { Swords, Trophy, Flame, Play, Menu } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { Avatar } from '../ui/Avatar';
 import { MobileDrawer } from './MobileDrawer';
+import { AudioControl } from '../ui/AudioControl';
 import { useAuthStore } from '../../store/authStore';
 import { sound } from '../../lib/sound';
 
@@ -12,7 +13,6 @@ export const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [visible, setVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
-  const [isAudioActive, setIsAudioActive] = useState(sound.isEnabled());
 
   const location = useLocation();
   const { user, isAuthenticated, logout } = useAuthStore();
@@ -40,14 +40,6 @@ export const Navbar: React.FC = () => {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollY]);
-
-  const toggleSound = () => {
-    const newState = sound.toggle();
-    setIsAudioActive(newState);
-    if (newState) {
-      sound.playClick();
-    }
-  };
 
   const navLinks = [
     { label: 'Play', path: '/play', icon: <Play className="w-4 h-4" /> },
@@ -105,19 +97,7 @@ export const Navbar: React.FC = () => {
 
           {/* Audio toggle + Profile / Auth */}
           <div className="hidden md:flex items-center gap-3">
-            {/* Audio SFX Toggle */}
-            <button
-              onClick={toggleSound}
-              title={isAudioActive ? 'Mute Procedural Audio' : 'Enable Procedural Audio'}
-              aria-label="Toggle procedural game audio"
-              className={`p-2 rounded-full border transition-all ${
-                isAudioActive
-                  ? 'border-accent-cyan/50 text-accent-cyan bg-accent-cyan/10 shadow-glow-cyan'
-                  : 'border-gray-800 text-gray-500 hover:text-gray-300'
-              }`}
-            >
-              {isAudioActive ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
-            </button>
+            <AudioControl />
 
             {isAuthenticated && user ? (
               <div className="flex items-center gap-3">
@@ -155,13 +135,7 @@ export const Navbar: React.FC = () => {
 
           {/* Mobile menu trigger */}
           <div className="md:hidden flex items-center gap-2">
-            <button
-              onClick={toggleSound}
-              aria-label="Toggle audio"
-              className="p-2 text-gray-400 hover:text-white"
-            >
-              {isAudioActive ? <Volume2 className="w-5 h-5 text-accent-cyan" /> : <VolumeX className="w-5 h-5" />}
-            </button>
+            <AudioControl compact />
             <button
               onClick={() => setMobileMenuOpen(true)}
               aria-label="Open navigation menu"
